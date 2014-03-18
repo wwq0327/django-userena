@@ -18,7 +18,8 @@ from userena.forms import (SignupForm, SignupFormOnlyEmail, AuthenticationForm,
 from userena.models import UserenaSignup
 from userena.decorators import secure_required
 from userena.backends import UserenaAuthenticationBackend
-from userena.utils import signin_redirect, get_profile_model, get_user_model, mail_site
+from userena.utils import signin_redirect, get_profile_model, get_user_model
+from userena.mail import mail_site
 from userena import signals as userena_signals
 from userena import settings as userena_settings
 
