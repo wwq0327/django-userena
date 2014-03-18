@@ -18,7 +18,7 @@ from userena.forms import (SignupForm, SignupFormOnlyEmail, AuthenticationForm,
 from userena.models import UserenaSignup
 from userena.decorators import secure_required
 from userena.backends import UserenaAuthenticationBackend
-from userena.utils import signin_redirect, get_profile_model, get_user_model
+from userena.utils import signin_redirect, get_profile_model, get_user_model, mail_site
 from userena import signals as userena_signals
 from userena import settings as userena_settings
 
@@ -348,6 +348,8 @@ def direct_to_user_template(request, username, template_name,
     if not extra_context: extra_context = dict()
     extra_context['viewed_user'] = user
     extra_context['profile'] = user.get_profile()
+    ## add mail host
+    extra_context['email_host'] = mail_site(user.email)
     return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
 
