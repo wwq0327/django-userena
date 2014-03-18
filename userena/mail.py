@@ -7,6 +7,29 @@ from django.core.mail import EmailMultiAlternatives
 
 from html2text import html2text as html2text_orig
 
+MAIL_DICT = {
+    '126.com': 'www.126.com',
+    'yeah.net': 'www.yeah.net',
+    'sina.com': 'mail.sina.com.cn',
+    'sohu.com': 'mail.sohu.com',
+    'gmail.com': 'mail.google.com',
+    'qq.com': 'mail.qq.com',
+    '163.com': 'mail.163.com',
+    '263.net': 'main.263.net',
+    'hotmail.com': 'www.hotmail.com',
+    }
+
+def mail_site(email):
+    try:
+        host = email.split('@')[1]
+    except IndexError:
+        pass
+    
+    mail_host = MAIL_DICT.get(host, '')
+    if mail_host:
+        return 'http://' + mail_host
+    else:
+        return ''
 
 LINK_RE = re.compile(r"https?://([^ \n]+\n)+[^ \n]+", re.MULTILINE)
 def html2text(html):
